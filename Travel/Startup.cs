@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Http;
-using Microsoft.Framework.DependencyInjection;
-using Travel.Models;
-using Microsoft.Data.Entity;
-using Microsoft.Framework.Runtime;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
+using Travel.Models;
 
 namespace Travel
 {
@@ -23,11 +19,13 @@ namespace Travel
             //  options =>
             //options.UseSqlServer(Configuration["Data:DefaultConnection:TripsConnectionString"])
             //);
+            services.AddTransient<TripsSeedData>();
+            services.AddScoped<TripsRepository>();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, TripsSeedData seed)
         {
-            app.UseDefaultFiles();
+            //  app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc(config =>
             {
@@ -41,6 +39,14 @@ namespace Travel
             {
                 await context.Response.WriteAsync("Hello World!");
             });
+
+            seed.InsertSeedData();
+
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<Trip, TripViewModel>().ReverseMap();
+            }
+            );
         }
 
         public static IConfigurationRoot Configuration;
@@ -52,5 +58,8 @@ namespace Travel
 
             Configuration = builder.Build();
         }
+
+        // Entry point for the application.
+        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

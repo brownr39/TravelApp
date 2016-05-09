@@ -19,9 +19,17 @@ namespace Travel.Models
             base.OnConfiguring(optionsBuilder);
         }
 
-        public DbSet<Trip> Trips { get; set; }
+        public DbSet<Trip> Trip { get; set; }
         public DbSet<Stop> Stops { get; set; }
 
+        public TravelContext()
+        {
+            Database.EnsureCreated();
+        }
 
+        public static implicit operator TravelContext(TripsRepository v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

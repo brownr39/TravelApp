@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "IISExpress": {
+      "executablePath": "C:\\Program Files (x86)\\IIS Express\\iisexpress.exe",
+      "workingDirectory": "C:\\Users\\robertbrown\\Documents\\Visual Studio 2015_1\\Projects",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5000"
+    },
+    "web": {
+      "commandName": "web",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5000/"
+    }
+  }
+}

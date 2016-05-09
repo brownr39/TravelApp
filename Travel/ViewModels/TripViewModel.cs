@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Travel.Models
+namespace Travel.ViewModels
 {
-    public class Trip
+    public class TripViewModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
         public DateTime DateCreated { get; set; }
         public string UserName { get; set; }
-        public ICollection <Stop> StopsList { get; set; }
+        public ICollection<StopViewModel> StopsList { get; set; }
 
     }
 }

@@ -10,12 +10,6 @@ namespace Travel.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            //things in this method are just for testing
-            Trip testTrip = new Trip();
-            //Stop testStop = new Stop();
-            testTrip.ID = 69;
-            //testStop.ID = 70;
-            ViewBag.MessageToUsers = testTrip.ID;
             return View();
         }
 
